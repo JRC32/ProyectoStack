@@ -1,0 +1,29 @@
+name: Validar Proyecto Web
+
+# Se ejecutará automáticamente cada vez que hagas un push a la rama main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  verificar-archivos:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Descarga el código de tu repositorio en la máquina virtual de GitHub
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      # 2. Comprueba que el archivo index.html existe realmente
+      - name: Verificar existencia de index.html
+        run: |
+          if [ -f "index.html" ]; then
+            echo "¡Perfecto! El archivo index.html existe."
+          else
+            echo "Error: No se encuentra el archivo index.html"
+            exit 1
+          fi
+
+      # 3. Muestra un mensaje de éxito indicando que el pipeline ha terminado
+      - name: Finalizar comprobación
+        run: echo "¡Integración continua completada con éxito!"
