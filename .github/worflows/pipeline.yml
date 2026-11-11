@@ -1,0 +1,22 @@
+name: Validar Proyecto Web
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  verificar-archivos:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Verificar existencia de index.html
+        run: |
+          if [ -f "index.html" ]; then
+            echo "¡Perfecto! El archivo index.html existe."
+          else
+            echo "Error: No se encuentra el archivo index.html"
+            exit 1
+          fi

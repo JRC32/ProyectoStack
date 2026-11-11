@@ -1,1 +1,37 @@
 <h1 id='titulo'>¡Hola desde mi proyecto stack!!!!!</h1>
+<h1>¡Actualizado desde local al mundo!</h1>
+
+<!-- 1. Carga la librería oficial de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // 2. Tus datos reales de Supabase
+  const SUPABASE_URL = 'https://bontoxjujhxhzojtzgza.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_DRKLGV_pPUUJbsHEoJDfkg_LVKXNJHQ'; // Pega aquí lo que copiaste
+
+  // 3. Inicializamos el cliente
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+  console.log("¡Supabase conectado con éxito!", supabaseClient);
+
+
+
+    async function cargarProductos() {
+  // Pedimos a Supabase que nos traiga todos los registros de la tabla 'productos'
+  const { data, error } = await supabaseClient
+    .from('productos')
+    .select('*');
+
+  if (error) {
+    console.error("Error al cargar los productos:", error);
+  } else {
+    console.log("¡Datos obtenidos desde la base de datos de Supabase!:", data);
+  }
+}
+
+// Ejecutamos la función al cargar la página
+cargarProductos();
+
+
+
+</script>
